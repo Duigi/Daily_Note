@@ -146,12 +146,35 @@ warning: You appear to have cloned an empty repository.
 Daily_Note	Python-note
 ```
 
-##### 补充
 
-在下载下来的下面做一些修改并提交。
-$ 进入刚下载的代码仓库：cd example/
-$ 修改”README.md”文件：echo "hello github" > README.md
-$ 添加修改的代码：git add README.md
-$ 查看修改的状态：git status
-$ 填写提交信息：git commit -m "add test message"
-$ 正式提交代码：git push origin master
+
+#### 远程仓库中的内容更新本地内容
+
+```shell
+#查看远程仓库
+$ git remote -v
+#下载远程仓库中的最新版本到本地
+$ git fetch origin master
+#比较下载内容和本地内容的不同
+$ git log -p master.. origin/master
+#把下载的代码合并到本地仓库
+$ git merge origin/master
+```
+
+还有另外一种更安全的方式：
+
+```shell
+#查看远程仓库
+$ git remote -v
+#从远程获取最新版本到本地(从远程的origin仓库master分支下载到本地并新建一个分支temp)
+$ git fetch origin master:temp
+#比较本地仓库和远程参考的区别(比较本地master和temp的区别)
+$ git diff temp
+#合并temp分支到master分支
+$ git merge temp
+#如果不想要temp分支了可以删除此分支
+$ git branch -d temp
+#如果该分支没有合并到主分支会报错，可以用以下命令强制删除
+$ git branch -D temp
+```
+
