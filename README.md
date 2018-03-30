@@ -1,0 +1,2 @@
+# Daily_Note
+markdown
